@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -33,8 +35,12 @@ class Product
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Assert\NotBlank(message="Please, upload the product image as an image file.")
+     * @Assert\Image()
      */
-    private $img_src;
+    private $img;
+
 
     public function getId(): ?int
     {
@@ -77,14 +83,14 @@ class Product
         return $this;
     }
 
-    public function getImgSrc(): ?string
+    public function getImg(): ?string
     {
-        return $this->img_src;
+        return $this->img;
     }
 
-    public function setImgSrc(?string $img_src): self
+    public function setImg(?string $img): self
     {
-        $this->img_src = $img_src;
+        $this->img = $img;
 
         return $this;
     }
